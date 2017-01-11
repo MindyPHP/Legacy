@@ -14,6 +14,24 @@ class Helper
 {
     static $encoding = 'UTF-8';
 
+    public static function implode($obj = null, $glue)
+    {
+        if ($obj === null) {
+            return [];
+        }
+
+        return implode($glue, $obj);
+    }
+
+    public static function explode($obj = null, $delimiter)
+    {
+        if ($obj === null) {
+            return [];
+        }
+
+        return explode($delimiter, $obj);
+    }
+
     public static function abs($obj = null)
     {
         return abs(intval($obj));
@@ -338,6 +356,19 @@ class Helper
     public static function call($obj = null, $method, array $args = [])
     {
         return call_user_func_array([$obj, $method], $args);
+    }
+
+    public static function merge($src = null, $dst = null)
+    {
+        if (!$src) {
+            $src = [];
+        }
+
+        if (!$dst) {
+            $dst = [];
+        }
+
+        return array_merge($src, $dst);
     }
 
     public static function strict_type($obj = null)

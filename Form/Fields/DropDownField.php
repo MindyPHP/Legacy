@@ -7,11 +7,8 @@ use Mindy\Base\Mindy;
 use Mindy\Form\Form;
 use Mindy\Form\ModelForm;
 use Mindy\Orm\Fields\ForeignField;
-use Mindy\Orm\Fields\HasManyField;
-use Mindy\Orm\Fields\ManyToManyField;
 use Mindy\Orm\Manager;
 use Mindy\Orm\Model;
-use Mindy\Orm\TreeManager;
 
 /**
  * Class DropDownField
@@ -131,7 +128,7 @@ class DropDownField extends Field
 
             $value = $this->getValue();
             if ($value) {
-                if ($value instanceof Manager || $value instanceof TreeManager) {
+                if ($value instanceof Manager) {
                     $selected = $value->valuesList(['pk'], true);
                 } else if ($value instanceof Model) {
                     $selected[] = $value->pk;
@@ -145,7 +142,6 @@ class DropDownField extends Field
             if ($this->multiple) {
                 $this->html['multiple'] = 'multiple';
             }
-
             return $this->valueToHtml($data, $selected);
         }
 
@@ -153,7 +149,7 @@ class DropDownField extends Field
             $model = $this->form->getModel();
             $field = $model->getField($this->name);
 
-            if ($field instanceof ManyToManyField) {
+            if (is_a($field, $model::$manyToManyField)) {
                 $this->multiple = true;
 
                 $modelClass = $field->modelClass;
@@ -175,7 +171,7 @@ class DropDownField extends Field
                 foreach ($models as $item) {
                     $data[$item->pk] = (string)$item;
                 }
-            } elseif ($field instanceof HasManyField) {
+            } elseif (is_a($field, $model::$hasManyField)) {
                 $this->multiple = true;
 
                 $modelClass = $field->modelClass;
@@ -186,7 +182,7 @@ class DropDownField extends Field
                 foreach ($models as $item) {
                     $data[$item->pk] = (string)$item;
                 }
-            } elseif ($field instanceof ForeignField) {
+            } elseif (is_a($field, $model::$foreignField)) {
                 $modelClass = $field->modelClass;
                 $qs = $modelClass::objects();
                 if (get_class($model) == $modelClass && $model->getIsNewRecord() === false) {

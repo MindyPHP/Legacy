@@ -2,7 +2,7 @@
 
 namespace Mindy\Table\Columns;
 
-use Mindy\Utils\RenderTrait;
+use Mindy\Helper\Traits\RenderTrait;
 
 /**
  * Class TemplateColumn

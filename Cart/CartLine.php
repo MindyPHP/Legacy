@@ -7,10 +7,12 @@
 
 namespace Mindy\Cart;
 
+use Mindy\Base\Mindy;
 use Mindy\Helper\Traits\Accessors;
 use Mindy\Helper\Traits\Configurator;
 use Mindy\Cart\Interfaces\ICartItem;
 use Mindy\Cart\Interfaces\ICartLine;
+use Modules\Catalog\Helpers\PriceHelper;
 use Serializable;
 
 /**
@@ -65,7 +67,8 @@ class CartLine implements Serializable, ICartLine
      */
     public function getPrice()
     {
-        $price = $this->getProduct()->getPrice($this->getParams()) * $this->getQuantity();
+        $user = Mindy::app()->user;
+        $price = PriceHelper::getPrice($this->getProduct(), $user->getIsGuest() ? null : $user) * $this->getQuantity();
         foreach ($this->getDiscounts() as $discount) {
             if ($discount instanceof \Closure) {
                 list($price, $sumNextDiscount) = $discount->__invoke($this->_product, $price, $this->_params, $this->_quantity);
@@ -77,7 +80,7 @@ class CartLine implements Serializable, ICartLine
                 break;
             }
         }
-        return (float)$price;
+        return (float)number_format($price, 2, '.', '');
     }
 
     /**

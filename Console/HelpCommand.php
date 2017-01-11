@@ -10,7 +10,6 @@ namespace Mindy\Console;
  * @copyright 2008-2013 Yii Software LLC
  * @license http://www.yiiframework.com/license/
  */
-use Mindy\Helper\Console;
 
 /**
  * HelpCommand displays help information for commands under yiic shell.
@@ -38,21 +37,23 @@ class HelpCommand extends ConsoleCommand
 
         if (!isset($args[0]) || !isset($commands[$name])) {
             echo <<<EOD
-Type 'help <command-name>' for details about a command.
+At the prompt, you may enter a PHP statement or one of the following commands:
 
 EOD;
             $commandNames = array_keys($commands);
             sort($commandNames);
-            $cmdList = [];
-            foreach ($commandNames as $cmd) {
-                list($module, ) = explode(':', $cmd);
-                $cmdList[$module][] = $cmd;
-            }
+            echo ' - ' . implode("\n - ", $commandNames);
+            echo <<<EOD
 
-            foreach ($cmdList as $module => $commands) {
-                echo Console::color($module, Console::FOREGROUND_GREEN) . PHP_EOL;
-                echo ' - ' . implode("\n - ", $commands) . PHP_EOL;
-            }
+
+Type 'help <command-name>' for details about a command.
+
+To expand the above command list, place your command class files
+under 'app/Commands', or a directory specified
+by the 'SHELL_COMMAND_PATH' environment variable. The command class
+must extend from ConsoleCommand.
+
+EOD;
         } else
             echo $runner->createCommand($name)->getHelp();
         return 1;

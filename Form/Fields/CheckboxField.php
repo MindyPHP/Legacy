@@ -1,6 +1,8 @@
 <?php
 
 namespace Mindy\Form\Fields;
+use Mindy\Orm\Manager;
+use Mindy\Orm\QuerySet;
 
 /**
  * Class CheckboxField
@@ -51,7 +53,9 @@ class CheckboxField extends CharField
             $i = 0;
             $values = $this->value;
 
-            if (!is_array($values)) {
+            if ($values instanceof Manager || $values instanceof QuerySet) {
+                $values = $values->valuesList(['pk'], true);
+            } else if (!is_array($values)) {
                 if ($values) {
                     $values = [$values];
                 } else {
@@ -81,7 +85,7 @@ class CheckboxField extends CharField
                     '{html}' => $html
                 ]);
                 $i++;
-                $contained = strtr($this->container, [
+                $contained = strtr($this->container . '<br/>', [
                     '{input}' => implode("\n", [$input, $label])
                 ]);
                 $inputs[] = $contained;

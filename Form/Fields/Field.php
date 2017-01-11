@@ -6,7 +6,6 @@ use Closure;
 use Exception;
 use Mindy\Form\BaseForm;
 use Mindy\Form\ModelForm;
-use Mindy\Helper\Creator;
 use Mindy\Helper\Traits\Accessors;
 use Mindy\Helper\Traits\Configurator;
 use Mindy\Validation\Interfaces\IValidateField;
@@ -42,6 +41,10 @@ abstract class Field implements IValidateField
      */
     public $escape = true;
     /**
+     * @var TODO
+     */
+    public $widget;
+    /**
      * @var string
      */
     public $inputType;
@@ -65,10 +68,6 @@ abstract class Field implements IValidateField
      * @var array
      */
     public $choices = [];
-    /**
-     * @var array
-     */
-    public $widget = [];
     /**
      * @var string html class for render hint
      */
@@ -101,11 +100,6 @@ abstract class Field implements IValidateField
      * @var string
      */
     private $_prefix;
-    /**
-     * Variable for avoid recursion
-     * @var bool
-     */
-    private $_renderWidget = true;
 
     public function init()
     {
@@ -159,15 +153,11 @@ abstract class Field implements IValidateField
      */
     public function getPrefix()
     {
-        $form = $this->getForm();
-        if ($form === null) {
-            return '';
-        }
-        $prefix = $this->_prefix ? $this->_prefix : $form->getPrefix();
+        $prefix = $this->_prefix ? $this->_prefix : $this->getForm()->getPrefix();
         if ($prefix) {
-            return $prefix . '[' . $form->classNameShort() . '][' . $this->getId() . ']';
+            return $prefix . '[' . $this->form->classNameShort() . '][' . $this->getId() . ']';
         } else {
-            return $form->classNameShort();
+            return $this->getForm()->classNameShort();
         }
     }
 
@@ -194,43 +184,16 @@ abstract class Field implements IValidateField
         return $this;
     }
 
-    /**
-     * @param $value
-     * @return $this
-     */
-    private function setRenderWidget($value)
-    {
-        $this->_renderWidget = $value;
-        return $this;
-    }
-
     public function renderInput()
     {
-        if (empty($this->widget) === false && $this->_renderWidget) {
-            if (is_string($this->widget)) {
-                $widget = Creator::createObject(['class' => $this->widget]);
-            } else if (is_array($this->widget)) {
-                $widget = Creator::createObject($this->widget);
-            } else {
-                $widget = $this->widget;
-            }
-            $this->setRenderWidget(false);
-            $input = $widget->setField($this)->render();
-            $this->setRenderWidget(true);
-            return $input;
-        } else {
-            $value = $this->getValue();
-            $attributes = $this->getHtmlAttributes();
-            $input = strtr($this->template, [
-                '{type}' => $this->type,
-                '{id}' => $this->getHtmlId(),
-                '{name}' => $this->getHtmlName(),
-                '{value}' => $this->escape ? htmlspecialchars($value, ENT_QUOTES) : $value,
-                '{html}' => empty($attributes) ? '' : ' ' . $attributes
-            ]);
-
-            return $input;
-        }
+        $value = $this->getValue();
+        return strtr($this->template, [
+            '{type}' => $this->type,
+            '{id}' => $this->getHtmlId(),
+            '{name}' => $this->getHtmlName(),
+            '{value}' => $this->escape ? htmlspecialchars($value, ENT_QUOTES) : $value,
+            '{html}' => $this->getHtmlAttributes()
+        ]);
     }
 
     public function render()
@@ -246,10 +209,6 @@ abstract class Field implements IValidateField
     public function getHtmlName()
     {
         $form = $this->getForm();
-        if ($form === null) {
-            return '';
-        }
-
         if ($form->usePrefix) {
             return $this->getPrefix() . '[' . $this->name . ']';
         } else {
@@ -260,27 +219,13 @@ abstract class Field implements IValidateField
     public function getHtmlAttributes()
     {
         if (is_array($this->html)) {
-            $html = [];
+            $html = '';
             foreach ($this->html as $name => $value) {
-                if ($name === 'id') {
-                    continue;
-                }
-
-                if ($value === true) {
-                    $value = 'true';
-                } else if ($value === false) {
-                    $value = 'false';
-                }
-
-                if (is_numeric($name)) {
-                    $html[] = $value;
-                } else {
-                    $html[] = $name . "='" . $value . "'";
-                }
+                $html .= is_numeric($name) ? " $value" : " $name='$value'";
             }
-            return trim(implode(' ', $html));
+            return $html;
         } else {
-            return trim($this->html);
+            return $this->html;
         }
     }
 
@@ -330,7 +275,7 @@ abstract class Field implements IValidateField
         return strtr("<label for='{for}'>{label}{star}</label>", [
             '{for}' => $this->getHtmlId(),
             '{label}' => $label,
-            '{star}' => $this->required ? " <span class='required'>*</span>" : ''
+            '{star}' => $this->required ? ' <span class="required">*</span>' : ''
         ]);
     }
 
@@ -341,12 +286,12 @@ abstract class Field implements IValidateField
             $errors .= "<li>{$error}</li>";
         }
 
-        return strtr('<ul class="{errorClass}" id="{id}_errors"{html}>{errors}</ul>', [
-            '{errorClass}' => $this->errorClass,
-            '{id}' => $this->getHtmlId(),
-            '{html}' => empty($errors) ? " style='display:none;'" : '',
-            '{errors}' => $errors
-        ]);
+        $html = "";
+        if (!$errors) {
+            $html = "style='display:none;'";
+        }
+
+        return "<ul class='{$this->errorClass}' id='{$this->getHtmlId()}_errors' {$html}>{$errors}</ul>";
     }
 
     public function renderHint()
@@ -383,12 +328,7 @@ abstract class Field implements IValidateField
 
     public function getHtmlPrefix()
     {
-        $prefix = $this->getPrefix();
-        if (empty($prefix)) {
-            return '';
-        }
-
-        return rtrim(str_replace(['][', '[]', '[', ']'], '_', $prefix), '_') . '_';
+        return rtrim(str_replace(['][', '[]', '[', ']'], '_', $this->getPrefix()), '_') . '_';
     }
 
     public function getChoices()

@@ -3,9 +3,14 @@
 namespace Mindy\Form;
 
 use Exception;
+use Mindy\Form\Fields\DeleteInlineField;
+use Mindy\Form\Fields\HiddenField;
 use Mindy\Helper\Creator;
+use Mindy\Locale\Translate;
 use Mindy\Orm\Fields\FileField;
+use Mindy\Orm\Manager;
 use Mindy\Orm\Model;
+use Mindy\Orm\QuerySet;
 
 /**
  * Class ModelForm
@@ -13,6 +18,7 @@ use Mindy\Orm\Model;
  */
 class ModelForm extends BaseForm
 {
+    public $ormClass = '\Mindy\Orm\Model';
     /**
      * @var \Mindy\Orm\Model
      */
@@ -35,7 +41,7 @@ class ModelForm extends BaseForm
         $fields = $this->getFields();
 
         foreach ($model->getFieldsInit() as $name => $field) {
-            if ($field->editable === false || $field->primary || in_array($name, $this->getExclude())) {
+            if ($field->editable === false || is_a($field, Model::$autoField) || in_array($name, $this->getExclude())) {
                 continue;
             }
 
@@ -88,10 +94,6 @@ class ModelForm extends BaseForm
         }
     }
 
-    /**
-     * @param Model $model
-     * @return $this
-     */
     protected function setInstanceValues(Model $model)
     {
         foreach ($model->getFields() as $name => $config) {
@@ -150,9 +152,11 @@ class ModelForm extends BaseForm
         return $this->_instance;
     }
 
-    /**
-     * @return bool
-     */
+    public function delete()
+    {
+        return $this->getInstance()->delete();
+    }
+
     public function save()
     {
         $this->setModelAttributes($this->cleanedData);
@@ -171,14 +175,9 @@ class ModelForm extends BaseForm
         return $this->_model;
     }
 
-    /**
-     * @param Model $model
-     * @return $this
-     */
     public function setModel(Model $model)
     {
         $this->_model = $model;
-        return $this;
     }
 
     protected function populateFromInstance(\Mindy\Orm\Model $model)
@@ -196,5 +195,14 @@ class ModelForm extends BaseForm
         if ($this->getPrefix()) {
             $this->getField('_pk')->setValue($model->pk);
         }
+    }
+
+    /**
+     * @param array $attributes
+     * @return \Mindy\Orm\Manager|\Mindy\Orm\QuerySet
+     */
+    public function getLinkModels(array $attributes)
+    {
+        return $this->getModel()->objects()->filter($attributes);
     }
 }

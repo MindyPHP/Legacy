@@ -9,13 +9,13 @@
     <title><?php echo $data['type']; ?></title>
     <script type="text/javascript">
         <?php
-        echo file_get_contents(__DIR__ . '/sh.js');
+        // echo file_get_contents(__DIR__ . '/sh.js');
         ?>
     </script>
     <style type="text/css">
         <?php
-        echo file_get_contents(__DIR__ . '/base.css');
-        echo file_get_contents(__DIR__ . '/core.css');
+        // echo file_get_contents(__DIR__ . '/base.css');
+        // echo file_get_contents(__DIR__ . '/core.css');
         ?>
     </style>
 </head>
@@ -24,7 +24,6 @@
 <div class="base-container">
     <div class="message">
         <h1><?php echo $data['type']; ?></h1>
-        <h2><?php echo $data['file']; ?></h2>
         <h2><?php echo $data['message']; ?></h2>
     </div>
 

@@ -145,19 +145,9 @@ class Cart
      * @param $key
      * @return bool
      */
-    public function remove($key)
-    {
-        return $this->getStorage()->remove($key);
-    }
-
-    /**
-     * @DEPRECATED
-     * @param $key
-     * @return bool
-     */
     public function removeKey($key)
     {
-        return $this->remove($key);
+        return $this->getStorage()->remove($key);
     }
 
     /**
