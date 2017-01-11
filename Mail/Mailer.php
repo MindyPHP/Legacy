@@ -202,7 +202,7 @@ class Mailer implements MailerInterface
     protected function createTransport(array $config)
     {
         if (!isset($config['class'])) {
-            $config['class'] = 'Swift_MailTransport';
+            $config['class'] = 'Swift_SendmailTransport';
         }
         if (isset($config['plugins'])) {
             $plugins = $config['plugins'];
