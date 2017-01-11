@@ -56,6 +56,7 @@ trait ValidateObject
 
             $this->cleanedData[$name] = $field->getValue();
         }
+
         return $this->hasErrors() === false;
     }
 

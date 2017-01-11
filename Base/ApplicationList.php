@@ -1,7 +1,6 @@
 <?php
 
 namespace Mindy\Base;
-use Mindy\Helper\Text;
 
 /**
  * Class ApplicationList
@@ -21,7 +20,7 @@ trait ApplicationList
 
         $array = [];
         foreach ($modules as $name => $config) {
-            $adminCode = Text::toUnderscore($name) . '.admin';
+            $adminCode = strtolower($name) . '.admin';
 
             $name = is_array($config) ? $name : $config;
 
@@ -38,7 +37,7 @@ trait ApplicationList
                         continue;
                     } else {
                         foreach ($items['items'] as $item) {
-                            if (isset($item['adminClass']) && $user->can($adminCode . '.' . Text::toUnderscore($item['adminClass'])) || !isset($item['code']) && $user->is_superuser) {
+                            if (isset($item['adminClass']) && $user->can($adminCode . '.' . strtolower($item['adminClass'])) || !isset($item['code']) && $user->is_superuser) {
                                 $resultItems[] = $item;
                             }
                         }

@@ -20,4 +20,10 @@ interface ICartItem
      * @return mixed unique product identification
      */
     public function getUniqueId();
+
+    /**
+     * @param $data array
+     * @return int|float
+     */
+    public function getPrice(array $data = []);
 }
