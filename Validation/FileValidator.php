@@ -68,7 +68,7 @@ class FileValidator extends Validator
         $t = Translate::getInstance();
         $model = $this->getModel();
         if (is_array($value)) {
-            $v = $model && $this->name ? $model->{$this->name}->getValue() : null;
+            $v = $model ? $model->{$this->name}->getValue() : null;
             if (
                 empty($v) &&
                 $value['error'] != UPLOAD_ERR_OK &&

@@ -266,7 +266,7 @@ abstract class BasePagination implements Serializable
     protected function applyLimitQuerySet()
     {
         $source = clone $this->source;
-        $this->total = $source->count();
+        $this->total = count($source->asArray()->all());
         $this->data = $this->source->paginate($this->getPage(), $this->fetchPageSize())->all();
         return $this->data;
     }
