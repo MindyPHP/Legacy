@@ -1,0 +1,28 @@
+{
+  "name": "mindy/cart",
+  "description": "Shopping cart component",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Maxim Falaleev",
+      "email": "max@studio107.ru"
+    }
+  ],
+  "require": {
+    "mindy/helper": "1.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "phpunit/php-code-coverage": "^4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mindy\\Cart\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Mindy\\Cart\\": "test/"
+    }
+  }
+}

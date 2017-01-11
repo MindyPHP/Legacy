@@ -1,0 +1,28 @@
+{
+  "name": "mindy/helper",
+  "homepage": "https://github.com/MindyPHP/Mindy_Helper",
+  "license": "BSD",
+  "autoload": {
+    "psr-4": {
+      "Mindy\\Helper\\": "src/Mindy/Helper"
+    }
+  },
+  "require": {
+    "php": ">=5.4",
+    "goodby/csv": "*"
+  },
+  "require-dev": {
+    "satooshi/php-coveralls": "dev-master"
+  },
+  "authors": [
+    {
+      "name": "Maxim Falaleev",
+      "email": "max@studio107.ru",
+      "homepage": "http://studio107.ru",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/MindyPHP/Mindy_Helper/issues?state=open"
+  }
+}

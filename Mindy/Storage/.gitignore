@@ -1,0 +1,6 @@
+Tests/runtime
+Tests/www
+.idea
+*.iml
+vendor
+composer.lock

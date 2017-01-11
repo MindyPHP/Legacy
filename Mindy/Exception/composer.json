@@ -1,0 +1,24 @@
+{
+    "name": "mindy/exception",
+    "homepage": "https://github.com/studio107/Mindy_Exception",
+    "license": "MIT",
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.4"
+    },
+    "authors": [
+        {
+            "name": "Maxim Falaleev",
+            "email": "max@studio107.ru",
+            "homepage": "http://studio107.ru",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/studio107/Mindy_Exception/issues?state=open"
+    }
+}

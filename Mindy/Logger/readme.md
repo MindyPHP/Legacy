@@ -1,0 +1,5 @@
+[![Build Status](https://travis-ci.org/studio107/Mindy_Logger.png?branch=master)](https://travis-ci.org/studio107/Mindy_Logger)
+[![Coverage Status](https://coveralls.io/repos/studio107/Mindy_Logger/badge.png)](https://coveralls.io/r/studio107/Mindy_Logger)
+[![Latest Stable Version](https://poser.pugx.org/mindy/logger/v/stable.png)](https://packagist.org/packages/mindy/logger)
+[![Latest Unstable Version](https://poser.pugx.org/mindy/logger/v/unstable.png)](https://packagist.org/packages/mindy/logger)
+[![Total Downloads](https://poser.pugx.org/mindy/logger/downloads.png)](https://packagist.org/packages/mindy/logger)

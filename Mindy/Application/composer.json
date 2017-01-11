@@ -1,0 +1,28 @@
+{
+  "name": "mindy/application",
+  "homepage": "https://github.com/MindyPHP/Mindy_Application",
+  "type": "library",
+  "license": "BSD",
+  "autoload": {
+    "psr-4": {
+      "Mindy\\Application\\": "src/Mindy/Application"
+    }
+  },
+  "require": {
+    "php": ">=5.4"
+  },
+  "require-dev": {
+    "satooshi/php-coveralls": "dev-master"
+  },
+  "authors": [
+    {
+      "name": "Maxim Falaleev",
+      "email": "max@studio107.ru",
+      "homepage": "http://studio107.ru",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/MindyPHP/Mindy_Application/issues?state=open"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "mindy/session",
+  "homepage": "https://github.com/studio107/Mindy_Session",
+  "license": "BSD",
+  "version": "1.0",
+  "autoload": {
+    "psr-4": {
+      "Mindy\\Session\\": "src/Mindy/Session"
+    }
+  },
+  "require": {
+    "php": ">=5.4",
+    "mindy/base": "*",
+    "mindy/helper": "*",
+    "mindy/exception": "*"
+  },
+  "require-dev": {
+    "satooshi/php-coveralls": "dev-master"
+  },
+  "authors": [
+    {
+      "name": "Maxim Falaleev",
+      "email": "max@studio107.ru",
+      "homepage": "http://studio107.ru",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/studio107/Mindy_Session/issues?state=open"
+  }
+}

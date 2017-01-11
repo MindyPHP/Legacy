@@ -1,0 +1,23 @@
+{
+    "name": "mindy/finder",
+    "homepage": "http://studio107.ru",
+    "type": "library",
+    "license": "BSD",
+    "autoload": {
+        "psr-4": {
+            "Mindy\\Finder\\": "src/Mindy/Finder"
+        }
+    },
+    "require": {
+        "php": ">=5.5"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "authors": [{
+        "name": "Maxim Falaleev",
+        "email": "max@studio107.ru",
+        "homepage": "http://studio107.ru",
+        "role": "Developer"
+    }]
+}

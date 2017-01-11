@@ -1,0 +1,38 @@
+{
+  "name": "mindy/orm",
+  "homepage": "https://github.com/MindyPHP/Mindy_Orm",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Mindy\\Orm\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Mindy\\Orm\\Tests\\": "test/",
+      "Modules\\Tests\\Models\\": "test/app/Models"
+    }
+  },
+  "require": {
+    "imagine/imagine": "*",
+    "mindy/helper": "*",
+    "mindy/application": "*",
+    "mindy/query": "2.*",
+    "mindy/query_builder": "1.*",
+    "mindy/tests": "*",
+    "mindy/validation": "*",
+    "mindy/storage": "*",
+    "mindy/console": "*"
+  },
+  "authors": [
+    {
+      "name": "Maxim Falaleev",
+      "email": "max@studio107.ru",
+      "homepage": "http://studio107.ru",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/MindyPHP/Mindy/issues?state=open"
+  }
+}

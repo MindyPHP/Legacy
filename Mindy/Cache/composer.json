@@ -1,0 +1,33 @@
+{
+  "name": "mindy/cache",
+  "homepage": "https://github.com/studio107/Mindy_Cache",
+  "license": "BSD",
+  "autoload": {
+    "psr-4": {
+      "Mindy\\Cache\\": "src/Mindy/Cache"
+    }
+  },
+  "require": {
+    "php": ">=5.4"
+  },
+  "require-dev": {
+    "satooshi/php-coveralls": "dev-master"
+  },
+  "authors": [
+    {
+      "name": "Maxim Falaleev",
+      "email": "max@studio107.ru",
+      "homepage": "http://studio107.ru",
+      "role": "Developer"
+    },
+    {
+      "name": "Alex Gordeev",
+      "email": "alex@studio107.ru",
+      "homepage": "http://studio107.ru",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/studio107/Mindy_Cache/issues?state=open"
+  }
+}

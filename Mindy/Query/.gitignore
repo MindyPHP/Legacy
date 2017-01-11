@@ -1,0 +1,15 @@
+*~
+*.iml
+.DS_Store
+*.log
+
+phpunit.phar
+composer.phar
+composer.lock
+vendor
+
+.idea
+.phpcomplete_extended
+
+test/tmp/*
+test/config_local.php

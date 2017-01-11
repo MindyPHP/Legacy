@@ -1,0 +1,32 @@
+{
+    "name": "mindy/router",
+    "homepage": "https://github.com/MindyPHP/Mindy_Router",
+    "description": "Fast request router for PHP",
+    "keywords": ["routing", "router"],
+    "license": "BSD-3-Clause",
+    "authors": [{
+        "name": "Joe Green",
+        "email": "joe.green.0991@gmail.com"
+    }, {
+        "name": "Nikita Popov",
+        "email": "nikic@php.net"
+    }, {
+        "name": "Maxim Falaleev",
+        "email": "max@studio107.ru",
+        "homepage": "http://studio107.ru"
+    }],
+    "autoload": {
+        "psr-4": {
+            "Mindy\\Router\\": "src/Mindy/Router"
+        }
+    },
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "support": {
+        "issues": "https://github.com/MindyPHP/Mindy_Router/issues?state=open"
+    }
+}

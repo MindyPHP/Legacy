@@ -1,0 +1,33 @@
+{
+  "name": "mindy/storage",
+  "homepage": "https://github.com/MindyPHP/Mindy_Storage",
+  "license": "BSD",
+  "autoload": {
+    "psr-4": {
+      "Mindy\\Storage\\": "src/Mindy/Storage"
+    }
+  },
+  "require": {
+    "php": ">=5.4",
+    "mindy/helper": "*",
+    "mindy/exception": "*",
+    "mindy/orm": "*",
+    "mindy/logger": "*",
+    "league/flysystem": "^1.0",
+    "league/flysystem-cached-adapter": "^1.0"
+  },
+  "require-dev": {
+    "satooshi/php-coveralls": "dev-master"
+  },
+  "authors": [
+    {
+      "name": "Maxim Falaleev",
+      "email": "max@studio107.ru",
+      "homepage": "http://studio107.ru",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/MindyPHP/Mindy_Storage/issues?state=open"
+  }
+}

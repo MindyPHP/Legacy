@@ -1,0 +1,6 @@
+composer.lock
+build
+.phpcomplete_extended
+*.swp
+.DS_Store
+vendor

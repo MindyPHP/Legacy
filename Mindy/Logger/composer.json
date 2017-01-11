@@ -1,0 +1,32 @@
+{
+  "name": "mindy/logger",
+  "homepage": "https://github.com/MindyPHP/Mindy_Logger",
+  "type": "library",
+  "license": "BSD",
+  "autoload": {
+    "psr-4": {
+      "Mindy\\Logger\\": "src/Mindy/Logger"
+    }
+  },
+  "require": {
+    "php": ">=5.4",
+    "mindy/helper": "*",
+    "monolog/monolog": "1.*",
+    "raven/raven": "0.9.*",
+    "bramus/monolog-colored-line-formatter": "^2.0"
+  },
+  "require-dev": {
+    "satooshi/php-coveralls": "dev-master"
+  },
+  "authors": [
+    {
+      "name": "Maxim Falaleev",
+      "email": "max@studio107.ru",
+      "homepage": "http://studio107.ru",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/MindyPHP/Mindy_Logger/issues?state=open"
+  }
+}
