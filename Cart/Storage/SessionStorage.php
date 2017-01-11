@@ -16,7 +16,7 @@ class SessionStorage implements ICartStorage
     /**
      * Prepare array with productions in $_SESSION
      */
-    public function init()
+    public function __construct()
     {
         if (!isset($_SESSION[self::KEY])) {
             $_SESSION[self::KEY] = [];
